@@ -23,6 +23,12 @@ class User extends Authenticatable
         'password',
     ];
 
+
+    //1対多でユーザーに紐づいたTweetデータを取得する
+    public function userTweets(){
+        return $this->hasMany(Tweet::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
