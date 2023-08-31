@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tweet;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
+
 
 class TweetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Tweet一覧表示機能 ------------------------------
     public function index()
     {
         $tweets = [];
@@ -16,20 +17,27 @@ class TweetController extends Controller
         return view(('tweet.index') , compact('tweets'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Tweet投稿画面表示 ------------------------------
     public function create()
     {
         return view('tweet.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Tweet新規投稿機能 ------------------------------
     public function store(Request $request)
     {
-        
+        //バリデーション
+        // $validator = Validator::make($request->all(), [
+        //     'tweet' => 'required | max:191' ,
+        //     'description' => 'required',
+        // ]);
+        // //バリデーションエラーを出す
+        // if($validator->fails()) {
+        //     return redirect()->route('tweet.create')->withInput()->withErrors($validator);
+        // }
+
+        $result = Tweet::create($request->all());
+        return redirect()->route('tweet.index');
     }
 
     /**
