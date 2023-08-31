@@ -29,6 +29,22 @@ class User extends Authenticatable
         return $this->hasMany(Tweet::class);
     }
 
+
+    //多対多の連携 いいね機能
+    public function tweets(){
+        return $this->belongsToMany(Tweet::class)->withTimestamps();
+    }
+
+
+    //多対多の連携 フォローしている
+    public function followings(){
+        return $this->belongsToMany(self::class, "follows", "user_id", "following_id")->withTimestamps();
+    }
+    //多対多の連携 フォロワーされている
+    public function followers(){
+        return $this->belongsToMany(self::class, "follows", "following_id", "user_id")->withTimestamps();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
