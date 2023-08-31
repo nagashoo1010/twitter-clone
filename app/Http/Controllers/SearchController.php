@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tweet;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -9,9 +11,16 @@ class SearchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $keyword = trim($request->keyword);
+        $users  = User::where('name', 'like', "%{$keyword}%")->pluck('id')->all();
+        $tweets = Tweet::query()
+            ->where('tweet', 'like', "%{$keyword}%")
+            ->orWhere('description', 'like', "%{$keyword}%")
+            ->orWhereIn('user_id', $users)
+            ->get();
+        return view('tweet.index', compact('tweets'));
     }
 
     /**
