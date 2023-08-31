@@ -52,7 +52,8 @@ class TweetController extends Controller
      */
     public function edit(string $id)
     {
-
+        $tweet = Tweet::find($id);
+        return view('tweet.edit' , compact('tweet'));
     }
 
     /**
@@ -63,9 +64,7 @@ class TweetController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //Tweet削除機能-------------------------------
     public function destroy(string $id)
     {
         $result = Tweet::find($id)->delete();
