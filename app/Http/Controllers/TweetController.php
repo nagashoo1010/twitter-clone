@@ -11,7 +11,9 @@ class TweetController extends Controller
      */
     public function index()
     {
-        //
+        $tweets = [];
+        // var_dump($tweets);
+        return view(('tweet.index') , compact('tweets'));
     }
 
     /**
@@ -19,7 +21,7 @@ class TweetController extends Controller
      */
     public function create()
     {
-        //
+        return view('tweet.create');
     }
 
     /**
@@ -27,7 +29,7 @@ class TweetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
