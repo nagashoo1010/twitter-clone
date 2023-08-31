@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('tweet', TweetController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('tweet', TweetController::class);
+});
 
 Route::get('/', function () {
     return view('welcome');
