@@ -3,6 +3,7 @@
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
+    Route::get('/tweet/search/result', [SearchController::class, 'index'])->name('search.result');
+
     Route::get('/tweet/timeline', [TweetController::class, 'timeline'])->name('tweet.timeline');
 
     Route::get('user/{user}', [FollowController::class, 'show'])->name('follow.show');
