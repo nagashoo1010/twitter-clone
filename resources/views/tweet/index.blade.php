@@ -21,7 +21,10 @@
               @foreach ($tweets as $tweet)
               <tr class="hover:bg-grey-lighter">
                 <td class="py-4 px-6 border-b border-grey-light">
-                  <h3 class="text-left font-bold text-lg text-grey-dark">{{$tweet->tweet}}</h3>
+                  <!-- 🔽 詳細画面へのリンク -->
+                  <a href="{{ route('tweet.show',$tweet->id) }}">
+                    <h3 class="text-left font-bold text-lg text-grey-dark">{{$tweet->tweet}}</h3>
+                  </a>
                   <div class="flex">
                     <!-- 更新ボタン -->
                     <!-- 削除ボタン -->

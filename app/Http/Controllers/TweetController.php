@@ -40,12 +40,11 @@ class TweetController extends Controller
         return redirect()->route('tweet.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    //Tweet詳細画面の表示-------------------------------
     public function show(string $id)
     {
-        //
+        $tweet = Tweet::find($id);
+        return view('tweet.show',compact('tweet'));
     }
 
     /**
@@ -53,7 +52,7 @@ class TweetController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
