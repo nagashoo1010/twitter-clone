@@ -25,4 +25,9 @@ class Tweet extends Model
     public static function getAllOrderByUpdated_at(){
         return self::orderBy('updated_at', 'desc')->get();
     }
+
+    //多対1でTweetに紐づいたユーザーを取得する
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }
