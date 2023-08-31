@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tweet;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
 {
@@ -24,20 +24,25 @@ class TweetController extends Controller
     }
 
     // Tweet新規投稿機能 ------------------------------
-    public function store(Request $request)
-    {
-        //バリデーション
-        // $validator = Validator::make($request->all(), [
-        //     'tweet' => 'required | max:191' ,
-        //     'description' => 'required',
-        // ]);
-        // //バリデーションエラーを出す
-        // if($validator->fails()) {
-        //     return redirect()->route('tweet.create')->withInput()->withErrors($validator);
-        // }
+    public function store(Request $request){
+    // バリデーション
+    // $validator = Validator::make($request->all(), [
+    //     'tweet' => 'required | max:191',
+    //     'description' => 'required',
+    // ]);
+    // // バリデーション:エラー
+    // if ($validator->fails()) {
+    //     return redirect()->route('tweet.create')->withInput()->withErrors($validator);
+    // }
 
-        $result = Tweet::create($request->all());
-        return redirect()->route('tweet.index');
+    // $data = $request->merge(['user_id' => Auth::user()->id])->all();
+    // dd($data);
+    $data = $request->all();
+    $data['user_id'] = Auth::user()->id;
+    $result = Tweet::create($data);
+
+    // tweet.index」にリクエスト送信（一覧ページに移動）
+    return redirect()->route('tweet.index');
     }
 
     //Tweet詳細画面の表示-------------------------------
