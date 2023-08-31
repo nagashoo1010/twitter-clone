@@ -19,4 +19,9 @@ class Tweet extends Model
         'tweet',
         'description',
     ];
+
+    // 降順でデータを取得
+    public static function getAllOrderByUpdated_at(){
+        return self::orderBy('updated_at', 'desc')->get();
+    }
 }

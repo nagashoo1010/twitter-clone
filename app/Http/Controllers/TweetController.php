@@ -12,8 +12,8 @@ class TweetController extends Controller
     // Tweet一覧表示機能 ------------------------------
     public function index()
     {
-        $tweets = [];
-        // var_dump($tweets);
+        $tweets = Tweet::getAllOrderByUpdated_at();
+        // dd($tweets);
         return view(('tweet.index') , compact('tweets'));
     }
 
