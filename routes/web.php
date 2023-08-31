@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/tweet/timeline', [TweetController::class, 'timeline'])->name('tweet.timeline');
+
     Route::get('user/{user}', [FollowController::class, 'show'])->name('follow.show');
 
     Route::post('user/{user}/follow', [FollowController::class, 'store'])->name('follow');
