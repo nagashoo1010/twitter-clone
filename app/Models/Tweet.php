@@ -30,4 +30,9 @@ class Tweet extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+     //多対多の連携
+    public function users(){
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
 }
